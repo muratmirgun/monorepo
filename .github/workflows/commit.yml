@@ -14,4 +14,4 @@ jobs:
       - uses: webiny/action-conventional-commits@v1.1.0
         with:
           # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          allowed-commit-types: "feat,fix,lint,chore,add" 
+          allowed-commit-types: "feat,fix,docs,style,refactor,test,build,perf,ci,chore,revert,merge,wip" 
