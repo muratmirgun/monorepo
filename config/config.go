@@ -5,12 +5,18 @@ import (
 	"github.com/jinzhu/configor"
 )
 
+const (
+	DEV  = "development"
+	STG  = "staging"
+	PROD = "production"
+)
+
 type Config struct {
 	AppName string `default:"monorepo" env:"APP_NAME" required:"true" yaml:"app_name"`
+	Env     string `default:"development" env:"ENV" yaml:"env"`
 
 	Database Database `yaml:"database"`
-
-	Server Server `yaml:"server"`
+	Server   Server   `yaml:"server"`
 }
 
 type DoctorConfig struct {
@@ -35,23 +41,23 @@ type Server struct {
 }
 
 func LoadConfig() (*Config, error) {
-	var cfg *Config
+	var cfg Config
 
 	err := configor.Load(&cfg, "config.yml")
 	if err != nil {
 		return nil, errors.New("ERROR: Failed to load config file %w" + err.Error())
 	}
 
-	return cfg, nil
+	return &cfg, nil
 }
 
 func LoadDoctorConfig() (*DoctorConfig, error) {
-	var cfg *DoctorConfig
+	var cfg DoctorConfig
 
-	err := configor.Load(&cfg, "config.yml")
+	err := configor.New(&configor.Config{ErrorOnUnmatchedKeys: false}).Load(&cfg, "config.yml")
 	if err != nil {
-		return nil, errors.New("ERROR: Failed to load config file %w" + err.Error())
+		return nil, errors.New("ERROR: Failed to load config file " + err.Error())
 	}
 
-	return cfg, nil
+	return &cfg, nil
 }

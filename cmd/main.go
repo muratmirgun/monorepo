@@ -10,9 +10,9 @@ func main() {
 	root := cmd.NewRootCommand()
 
 	root.AddCommand(commands.ApiDoctor)
-	//root.AddCommand(commands.ApiServe)
+	root.AddCommand(commands.ApiServe)
+	root.AddCommand(commands.ApiMigration)
 
-	//version := cmd.NewVersionCommand()
 	//root.AddCommand(version)
 
 	if err := root.Execute(); err != nil {

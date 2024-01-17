@@ -1,0 +1,55 @@
+version: '3.9'
+
+services:
+  backend:
+    build: .
+    container_name: backend
+    image: backend
+    ports:
+      - "8082:8082"
+    depends_on:
+      - postgres
+    env_file: .env
+    networks:
+      - app_net
+
+  postgres:
+    container_name: postgres
+    image: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: database
+      PGDATA: /data/postgres
+    volumes:
+      - postgres:/data/postgres
+#      - ./internal/store/postgres/migration/init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "5432:5432"
+    networks:
+      - app_net
+    restart: unless-stopped
+
+  cache:
+    container_name: cache
+    image: redis:7.2.1-alpine
+    restart: always
+    ports:
+      - '6379:6379'
+    command: redis-server --save 20 1 --loglevel warning --requirepass eYVX7EwVkwjKPCDmwMtyKVge8oLd2t81
+    environment:
+      ALLOW_EMPTY_PASSWORD: no
+      REDIS_DISABLE_COMMANDS: FLUSHDB,FLUSHALL
+    networks:
+      - app_net
+    volumes:
+      - cache:/data/redis
+
+networks:
+  app_net:
+    driver: bridge
+
+volumes:
+  cache:
+    driver: local
+  postgres:

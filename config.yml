@@ -1,0 +1,13 @@
+app_name: monorepo
+env: development
+
+database:
+  host: localhost
+  port: "5432"
+  user: postgres
+  password: postgres
+  name: database
+
+server:
+  port: "8081"
+  shutdown_timeout: 10
