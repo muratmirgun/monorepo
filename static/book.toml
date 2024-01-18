@@ -3,4 +3,4 @@ authors = ["Murat mirgun Ercan"]
 language = "en"
 multilingual = false
 src = "src"
-title = "monorepo"
+title = "Monorepo"

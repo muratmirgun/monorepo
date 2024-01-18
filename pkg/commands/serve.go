@@ -22,7 +22,7 @@ var ApiServe = &cobra.Command{
 
 func serve(cmd *cobra.Command, args []string) {
 	// init config
-	cfg, err := config.LoadConfig()
+	cfg, err := config.LoadConfig("")
 	if err != nil {
 		panic(err)
 		return

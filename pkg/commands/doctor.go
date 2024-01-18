@@ -50,7 +50,7 @@ func doctor(cmd *cobra.Command, args []string) {
 	output, err := cmdGo.CombinedOutput()
 
 	if err != nil {
-		check.UpdateMessagef("Go installation check... %s %s", "ERROR:"+err.Error())
+		check.UpdateMessagef("Go installation check... %s %s", "ERROR:", err.Error())
 		check.Complete()
 
 		sm.Stop()
@@ -72,7 +72,7 @@ func doctor(cmd *cobra.Command, args []string) {
 	dsn := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable", cfg.Database.Host, cfg.Database.Port, cfg.Database.User, cfg.Database.Password, cfg.Database.Name)
 	open, err := sql.Open("postgres", dsn)
 	if err != nil {
-		check.UpdateMessagef("Postgres installation check... %s %s", "ERROR:"+err.Error())
+		check.UpdateMessagef("Postgres installation check... %s %s", "ERROR:", err.Error())
 		check.Complete()
 
 		sm.Stop()
@@ -83,7 +83,7 @@ func doctor(cmd *cobra.Command, args []string) {
 
 	err = open.Ping()
 	if err != nil {
-		check.UpdateMessagef("Postgres installation check... %s %s", "ERROR:"+err.Error())
+		check.UpdateMessagef("Postgres installation check... %s %s", "ERROR:", err.Error())
 		check.Complete()
 
 		sm.Stop()

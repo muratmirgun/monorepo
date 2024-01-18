@@ -2,6 +2,7 @@ package config
 
 import (
 	"errors"
+	"fmt"
 	"github.com/jinzhu/configor"
 )
 
@@ -40,12 +41,16 @@ type Server struct {
 	ShutdownTimeout int    `default:"10" env:"SHUTDOWN_TIMEOUT" yaml:"shutdown_timeout"`
 }
 
-func LoadConfig() (*Config, error) {
+func LoadConfig(filename string) (*Config, error) {
+	if filename == "" {
+		filename = "config.yml"
+	}
+
 	var cfg Config
 
-	err := configor.Load(&cfg, "config.yml")
+	err := configor.Load(&cfg, filename)
 	if err != nil {
-		return nil, errors.New("ERROR: Failed to load config file %w" + err.Error())
+		return nil, fmt.Errorf("ERROR: Failed to load config file %s: %w", filename, err)
 	}
 
 	return &cfg, nil
