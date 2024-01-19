@@ -1,10 +1,10 @@
 package commands
 
 import (
+	"github.com/muratmirgun/monorepo/config"
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
 	"github.com/spf13/cobra"
-	"monorepo/config"
 	"os"
 	"strconv"
 )

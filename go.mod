@@ -1,4 +1,4 @@
-module monorepo
+module github.com/muratmirgun/monorepo
 
 go 1.21.4
 

@@ -4,7 +4,7 @@ import (
 	"database/sql"
 	"fmt"
 	_ "github.com/lib/pq"
-	"monorepo/config"
+	"github.com/muratmirgun/monorepo/config"
 	"os/exec"
 	"regexp"
 	"time"

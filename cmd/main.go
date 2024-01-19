@@ -1,8 +1,8 @@
 package main
 
 import (
-	"monorepo/pkg/cmd"
-	"monorepo/pkg/commands"
+	"github.com/muratmirgun/monorepo/pkg/cmd"
+	"github.com/muratmirgun/monorepo/pkg/commands"
 	"os"
 )
 
