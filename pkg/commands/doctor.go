@@ -29,7 +29,7 @@ var ApiDoctor = &cobra.Command{
 }
 
 func doctor(cmd *cobra.Command, args []string) {
-	cfg, err := config.LoadDoctorConfig()
+	cfg, err := config.LoadDoctorConfig("")
 	if err != nil {
 		color.Red(err.Error())
 		return

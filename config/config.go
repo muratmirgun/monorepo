@@ -56,10 +56,14 @@ func LoadConfig(filename string) (*Config, error) {
 	return &cfg, nil
 }
 
-func LoadDoctorConfig() (*DoctorConfig, error) {
+func LoadDoctorConfig(filename string) (*DoctorConfig, error) {
+	if filename == "" {
+		filename = "config.yml"
+	}
+
 	var cfg DoctorConfig
 
-	err := configor.New(&configor.Config{ErrorOnUnmatchedKeys: false}).Load(&cfg, "config.yml")
+	err := configor.New(&configor.Config{ErrorOnUnmatchedKeys: false}).Load(&cfg, filename)
 	if err != nil {
 		return nil, errors.New("ERROR: Failed to load config file " + err.Error())
 	}
