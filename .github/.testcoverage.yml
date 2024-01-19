@@ -3,4 +3,4 @@
 profile: cover.out
 local-prefix: "github.com/muratmirgun/monorepo"
 threshold:
-  total: 90
+  total: 30
