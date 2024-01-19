@@ -1,5 +1,7 @@
 # MonoRepo
 [![Document Deploy](https://github.com/muratmirgun/monorepo/actions/workflows/main.yml/badge.svg)](https://github.com/muratmirgun/monorepo/actions/workflows/main.yml)
+[![Covarage](https://raw.githubusercontent.com/muratmirgun/monorepo/badges/.badges/main/coverage.svg)](https://raw.githubusercontent.com/muratmirgun/monorepo/badges/.badges/main/coverage.svg)
+
 > Golang Monolith Backend Structure for Production Ready Applications 
 
 
