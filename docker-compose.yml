@@ -23,7 +23,7 @@ services:
       PGDATA: /data/postgres
     volumes:
       - postgres:/data/postgres
-#      - ./internal/store/postgres/migration/init.sql:/docker-entrypoint-initdb.d/init.sql
+#      - ./internal/store/postgres/migration/20230117143902_initial.sql:/docker-entrypoint-initdb.d/20230117143902_initial.sql
     ports:
       - "5432:5432"
     networks:

@@ -1,8 +1,10 @@
 package commands
 
 import (
-	"database/sql"
+	"embed"
 	"fmt"
+	"github.com/muratmirgun/monorepo/internal/storage/database"
+	"github.com/rs/zerolog/log"
 	"github.com/spf13/cobra"
 
 	"github.com/pressly/goose/v3"
@@ -20,6 +22,9 @@ var ApiMigration = &cobra.Command{
 		fmt.Println("migration command use up or down sub command")
 	},
 }
+
+//go:embed migration/*.sql
+var postgresMigrations embed.FS
 
 func init() {
 	ApiMigration.AddCommand(ApiMigrationUp)
@@ -53,8 +58,33 @@ var ApiMigrationDown = &cobra.Command{
 	Run: migrationDown,
 }
 
+const (
+	postgresMigrationDir = "migration"
+	postgresDialect      = "postgres"
+)
+
 func migrationUp(cmd *cobra.Command, args []string) {
-	goose.Up(&sql.DB{}, "./migrations")
+	var db *database.Postgres
+
+	uri := "postgres://postgres:postgres@localhost:5432/database?sslmode=disable"
+	db, err := database.NewPostgres(uri)
+	if err != nil {
+		log.Fatal().Err(err).Msg("database connection error")
+	}
+	//defer closeDB(db)
+
+	goose.SetTableName("migration")
+
+	if err = goose.SetDialect(postgresDialect); err != nil {
+		log.Fatal().Err(err).Msg("goose dialect error")
+	}
+
+	goose.SetBaseFS(postgresMigrations)
+
+	if err = goose.Up(db.DB, postgresMigrationDir); err != nil {
+		log.Fatal().Err(err).Msg("goose up error")
+	}
+
 }
 
 func migrationDown(cmd *cobra.Command, args []string) {

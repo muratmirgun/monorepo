@@ -3,7 +3,7 @@ package commands
 import (
 	"database/sql"
 	"fmt"
-	_ "github.com/lib/pq"
+	_ "github.com/jackc/pgx/v5/stdlib"
 	"github.com/muratmirgun/monorepo/config"
 	"os/exec"
 	"regexp"
@@ -70,7 +70,7 @@ func doctor(cmd *cobra.Command, args []string) {
 	time.Sleep(2 * time.Second)
 
 	dsn := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable", cfg.Database.Host, cfg.Database.Port, cfg.Database.User, cfg.Database.Password, cfg.Database.Name)
-	open, err := sql.Open("postgres", dsn)
+	open, err := sql.Open("pgx", dsn)
 	if err != nil {
 		check.UpdateMessagef("Postgres installation check... %s %s", "ERROR:", err.Error())
 		check.Complete()
