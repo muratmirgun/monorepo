@@ -3,11 +3,7 @@ package commands
 import (
 	"embed"
 	"fmt"
-	"github.com/muratmirgun/monorepo/internal/storage/database"
-	"github.com/rs/zerolog/log"
 	"github.com/spf13/cobra"
-
-	"github.com/pressly/goose/v3"
 )
 
 var ApiMigration = &cobra.Command{
@@ -64,26 +60,25 @@ const (
 )
 
 func migrationUp(cmd *cobra.Command, args []string) {
-	var db *database.Postgres
-
-	uri := "postgres://postgres:postgres@localhost:5432/database?sslmode=disable"
-	db, err := database.NewPostgres(uri)
-	if err != nil {
-		log.Fatal().Err(err).Msg("database connection error")
-	}
-	//defer closeDB(db)
-
-	goose.SetTableName("migration")
-
-	if err = goose.SetDialect(postgresDialect); err != nil {
-		log.Fatal().Err(err).Msg("goose dialect error")
-	}
-
-	goose.SetBaseFS(postgresMigrations)
-
-	if err = goose.Up(db.DB, postgresMigrationDir); err != nil {
-		log.Fatal().Err(err).Msg("goose up error")
-	}
+	//	var db *database.Postgres
+	//
+	//	db, err := database.NewPostgres(&config.Database{})
+	//	if err != nil {
+	//		log.Fatal().Err(err).Msg("database connection error")
+	//	}
+	//	//defer closeDB(db)
+	//
+	//	goose.SetTableName("migration")
+	//
+	//	if err = goose.SetDialect(postgresDialect); err != nil {
+	//		log.Fatal().Err(err).Msg("goose dialect error")
+	//	}
+	//
+	//	goose.SetBaseFS(postgresMigrations)
+	//
+	//	//if err = goose.Up(db.DB, postgresMigrationDir); err != nil {
+	//	//	log.Fatal().Err(err).Msg("goose up error")
+	//	//}
 
 }
 

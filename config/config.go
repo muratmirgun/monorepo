@@ -16,8 +16,9 @@ type Config struct {
 	AppName string `default:"monorepo" env:"APP_NAME" required:"true" yaml:"app_name"`
 	Env     string `default:"development" env:"ENV" yaml:"env"`
 
-	Database Database `yaml:"database"`
-	Server   Server   `yaml:"server"`
+	OAuthGithub OAuthGithub `yaml:"oauth_github"`
+	Database    Database    `yaml:"database"`
+	Server      Server      `yaml:"server"`
 }
 
 type DoctorConfig struct {
@@ -33,6 +34,13 @@ type Database struct {
 	User     string `default:"postgres" env:"DB_USER" yaml:"user"`
 	Password string `default:"postgres" env:"DB_PASSWORD" yaml:"password"`
 	Name     string `default:"monorepo" env:"DB_NAME" yaml:"name"`
+}
+
+// OAuthGithub - OAuth configuration for Github
+type OAuthGithub struct {
+	ClientID     string `env:"GITHUB_CLIENT_ID" yaml:"client_id"`
+	ClientSecret string `env:"GITHUB_CLIENT_SECRET" yaml:"client_secret"`
+	RedirectUri  string `env:"GITHUB_REDIRECT_URI" yaml:"redirect_uri"`
 }
 
 // Server - Server configuration for HTTP

@@ -16,5 +16,4 @@ func NewRootCommand() *cobra.Command {
 			fmt.Println("monorepo is a CLI tool for managing your monolithic application")
 		},
 	}
-
 }
