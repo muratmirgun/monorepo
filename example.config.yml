@@ -8,6 +8,10 @@ database:
   password: postgres
   name: database
 
+oauth_github:
+  client_id: "client_id"
+  client_secret: "client_secret"
+  redirect_uri: "http://localhost:8081/api/v1/users/callback/github"
 
 server:
   port: "8081"
